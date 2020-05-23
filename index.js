@@ -1,7 +1,12 @@
-var http = require('http');
+var express = require('express')
+var app = express()
+const get_files = require('./app.js')
+app.set('view engine', 'ejs');
 
-var server = http.createServer(function (req, res) {
-    res.writeHead(200);
-    res.end('HELLLO TWITCH !');
-});
-server.listen(8080);
+app.get('/', function(req, res) {
+    res.render('pages/index', {files: get_files('/mnt/c/Users/nicol/Documents/Code/Web/')})
+})
+
+app.listen(8080, function () {
+    console.log('Listening on port 8080 !')
+})
