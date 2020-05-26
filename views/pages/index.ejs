@@ -4,11 +4,64 @@
     <%- include('../partials/head.ejs') %>
 </head>
 <body>
-    <h1>HELLO TWITCH !</h1>
-    <ul>
-        <% files.forEach(function(files) {%>
-            <li><%= files.name%> | <%= files.path %> | <%= files.type%></li>
-        <%});%>
-    </ul>
+    <%- include('../partials/navbar.ejs') %>
+    <main>
+        <div class="documents">
+            <form action="/file-upload"
+                  class="dropzone"
+                  id="my-awesome-dropzone"></form>
+            <div class="folder">
+                <h1>Folder:</h1>
+                <% files.forEach(function(files) {
+                if (files.type == 'dir') {%>
+                    <table style="width: 25%;">
+                        <tbody>
+                        <tr>
+                            <td style="width: 5%;">
+                                <a href="<%= files.path + files.name%>">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="folder" class="svg-inline--fa fa-folder fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 128H272l-64-64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V176c0-26.51-21.49-48-48-48z"></path></svg>
+                                </a>
+                            </td>
+                            <td style="width: 80%";>
+                                <a href="<%= files.path + files.name%>">
+                                    <%= files.name%>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                <%}});%>
+            </div>
+            <div class="files">
+                <h1>Files:</h1>
+                <% files.forEach(function(files) {
+                if (files.type != 'dir') {%>
+                        <table style="width: 25%;">
+                            <tbody>
+                            <tr>
+                                <td style="width: 5%;">
+                                    <a href="<%= files.path + files.name%>">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="file" class="svg-inline--fa fa-file fa-w-12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z"></path></svg><path fill="currentColor" d="M464 128H272l-64-64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V176c0-26.51-21.49-48-48-48z"></path></svg>
+                                    </a>
+                                </td>
+                                <td style="width: 80%";>
+                                    <a href="<%= files.path + files.name%>">
+                                        <%= files.name%>
+                                    </a>
+                                </td>
+                                <td style="width: 10%";>
+                                    <a href="<%= files.path + files.name%>" download>
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-download" class="svg-inline--fa fa-file-download fa-w-12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm76.45 211.36l-96.42 95.7c-6.65 6.61-17.39 6.61-24.04 0l-96.42-95.7C73.42 337.29 80.54 320 94.82 320H160v-80c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v80h65.18c14.28 0 21.4 17.29 11.27 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></svg>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </a>
+                <%}});%>
+            </div>
+        </div>
+    </main>
+<script src="dropzone-5.7.0/dist/dropzone.js"></script>
 </body>
 </html>
