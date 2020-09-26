@@ -10,7 +10,7 @@ const host_name = os.hostname()
 if (host_name == 'dellserver')
     var mypath = os.homedir()
 else
-    var mypath = '/mnt/c/Users/nicol/Documents/'
+    var mypath = '/home/kinofool/' // Start folder
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, './public')));
